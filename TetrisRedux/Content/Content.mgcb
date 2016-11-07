@@ -18,4 +18,3 @@
 /processor:FontDescriptionProcessor
 /processorParam:TextureFormat=Compressed
 /build:SpelFont.spritefont
-
