@@ -8,13 +8,6 @@ class TetrisGame : Game
     InputHelper inputHelper;
     GameWorld gameWorld;
 
-    [STAThread]
-    static void Main(string[] args)
-    {
-        TetrisGame game = new TetrisGame();
-        game.Run();
-    }
-
     public TetrisGame()
     {        
         // initialize the graphics device
@@ -29,6 +22,8 @@ class TetrisGame : Game
 
         // create the input helper object
         inputHelper = new InputHelper();
+
+        IsMouseVisible = true;
     }
 
     protected override void LoadContent()
@@ -43,6 +38,7 @@ class TetrisGame : Game
     protected override void Update(GameTime gameTime)
     {
         inputHelper.Update(gameTime);
+        if (inputHelper.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Escape)) Exit();
         gameWorld.HandleInput(gameTime, inputHelper);
         gameWorld.Update(gameTime);
     }

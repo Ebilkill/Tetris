@@ -8,7 +8,7 @@ using System;
 /*
  * A class for representing the game world.
  */
-class GameWorld
+public class GameWorld
 {
     /*
      * enum for different game states (playing or game over)
@@ -57,7 +57,7 @@ class GameWorld
 
         block = Content.Load<Texture2D>("block");
         font = Content.Load<SpriteFont>("SpelFont");
-        grid = new TetrisGrid(block);
+        grid = new TetrisGrid(this, block);
     }
 
     public void Reset()
@@ -66,6 +66,22 @@ class GameWorld
 
     public void HandleInput(GameTime gameTime, InputHelper inputHelper)
     {
+        if (inputHelper.KeyPressed(Keys.Left))
+        {
+            grid.CurrentBlock.Move(new Vector2(-1, 0));
+        }
+        if (inputHelper.KeyPressed(Keys.Right))
+        {
+            grid.CurrentBlock.Move(new Vector2(1, 0));
+        }
+        if (inputHelper.KeyPressed(Keys.Down))
+        {
+            grid.CurrentBlock.Move(new Vector2(0, 1));
+        }
+        if (inputHelper.KeyPressed(Keys.Up))
+        {
+            grid.CurrentBlock.Move(new Vector2(0, -1));
+        }
     }
 
     public void Update(GameTime gameTime)
@@ -76,8 +92,7 @@ class GameWorld
     {
         spriteBatch.Begin();
         grid.Draw(gameTime, spriteBatch);
-        DrawText("Hello!", Vector2.Zero, spriteBatch);
-        spriteBatch.End();    
+        spriteBatch.End(); 
     }
 
     /*
@@ -88,8 +103,6 @@ class GameWorld
         spriteBatch.DrawString(font, text, positie, Color.Blue);
     }
 
-    public Random Random
-    {
-        get { return random; }
-    }
+    public Random Random => random;
+    public TetrisGrid TheGrid => grid;
 }
