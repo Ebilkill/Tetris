@@ -44,7 +44,7 @@ namespace TetrisRedux.Blocks
 
         public static Block GetNextBlock(GameWorld world)
         {
-            return new BlockT(world, Vector2.Zero);
+            return new BlockZ(world, Vector2.Zero);
         }
 
         public Color Color => color;

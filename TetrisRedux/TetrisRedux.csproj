@@ -39,8 +39,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Blocks\Block.cs" />
+    <Compile Include="Blocks\BlockI.cs" />
+    <Compile Include="Blocks\BlockJ.cs" />
+    <Compile Include="Blocks\BlockL.cs" />
     <Compile Include="Blocks\BlockO.cs" />
+    <Compile Include="Blocks\BlockS.cs" />
     <Compile Include="Blocks\BlockT.cs" />
+    <Compile Include="Blocks\BlockZ.cs" />
     <Compile Include="GameWorld.cs" />
     <Compile Include="InputHelper.cs" />
     <Compile Include="Program.cs" />

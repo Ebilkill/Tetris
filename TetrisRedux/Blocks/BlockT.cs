@@ -9,7 +9,7 @@ namespace TetrisRedux.Blocks
 {
     public class BlockT : Block
     {
-        public BlockT(GameWorld world, Vector2 pos) : base(world, new Color(0xFF, 0x00, 0xFF, 0xFF))
+        public BlockT(GameWorld world, Vector2 pos) : base(world, new Color(0x94, 0x0B, 0xA0, 0xFF))
         {
             this.position = pos;
             this.blockShape = new bool[Width, Height];
