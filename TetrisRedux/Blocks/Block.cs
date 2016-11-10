@@ -44,7 +44,18 @@ namespace TetrisRedux.Blocks
 
         public static Block GetNextBlock(GameWorld world)
         {
-            return new BlockZ(world, Vector2.Zero);
+            List<Block> nextBlock = new List<Block>();
+            nextBlock.Add(new BlockI(world, Vector2.Zero));
+            nextBlock.Add(new BlockJ(world, Vector2.Zero));
+            nextBlock.Add(new BlockL(world, Vector2.Zero));
+            nextBlock.Add(new BlockO(world, Vector2.Zero));
+            nextBlock.Add(new BlockS(world, Vector2.Zero));
+            nextBlock.Add(new BlockT(world, Vector2.Zero));
+            nextBlock.Add(new BlockZ(world, Vector2.Zero));
+            int r = world.Random.Next(nextBlock.Count);
+            return nextBlock[r];
+          
+
         }
 
         public Color Color => color;
