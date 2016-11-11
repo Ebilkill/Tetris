@@ -53,19 +53,30 @@ public class GameWorld
 
     public GameWorld(int width, int height, ContentManager Content)
     {
+        // Initialize the screen size.
         screenWidth = width;
         screenHeight = height;
+
+        // Initialize the random number generator for the game.
         random = new Random();
+
+        // Set the active game state to playing by default.
         gameState = GameState.Playing;
 
+        // Initialize the list of all blocks.
+        Block.makeList(this);
+
+        // Load textures.
         block = Content.Load<Texture2D>("block");
         font = Content.Load<SpriteFont>("SpelFont");
-        Block.makeList(this);
+
+        // Load the tetris grid.
         grid = new TetrisGrid(this, block);
     }
 
     public void Reset()
     {
+        grid.Clear();
     }
 
     public void HandleInput(GameTime gameTime, InputHelper inputHelper)
@@ -101,6 +112,11 @@ public class GameWorld
           
     }
 
+    /// <summary>
+    /// Draws the game world.
+    /// </summary>
+    /// <param name="gameTime">The GameTime object passed to every update method (from MonoGame.Game).</param>
+    /// <param name="spriteBatch">The spritebatch to draw everything with.</param>
     public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         spriteBatch.Begin();
@@ -116,11 +132,21 @@ public class GameWorld
         spriteBatch.DrawString(font, text, positie, Color.Blue);
     }
 
+    /// <summary>
+    /// Sets the <code>GameState</code> to game over.
+    /// </summary>
     public void KillPlayer()
     {
         gameState = GameState.GameOver;
     }
 
+    /// <summary>
+    /// The random number generator that this gameworld uses.
+    /// </summary>
     public Random Random => random;
+
+    /// <summary>
+    /// The grid that Tetris is played in.
+    /// </summary>
     public TetrisGrid TheGrid => grid;
 }

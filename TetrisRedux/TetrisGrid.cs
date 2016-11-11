@@ -19,12 +19,12 @@ public class TetrisGrid
     private Vector2 position;
 
     /// <summary>
-    /// 
+    /// The positions in the grid to draw. A position is considered not occupied when the position is equal to EmptyColor.
     /// </summary>
     private Color[,] occupiedPositions;
 
     /// <summary>
-    /// 
+    /// The block that the player can move around. 
     /// </summary>
     private Block currentBlock;
 
@@ -36,7 +36,6 @@ public class TetrisGrid
         position = Vector2.Zero;
         occupiedPositions = new Color[Width, Height];
         world = parent;
-        this.Clear();
     }
 
     /*
@@ -55,6 +54,12 @@ public class TetrisGrid
         currentBlock = Block.GetNextBlock(world);
     }
 
+    /// <summary>
+    /// Checks whether a block can be placed at the specified position.
+    /// </summary>
+    /// <param name="block">The block to check availability for.</param>
+    /// <param name="pos">The position where the block wants to be.</param>
+    /// <returns>True if the block can be placed in the specified position, false otherwise.</returns>
     public bool CanPlaceBlockAt(Block block, Vector2 pos)
     {
         if (pos.X < 0 || pos.Y < 0)
@@ -100,20 +105,24 @@ public class TetrisGrid
        currentBlock.Draw(gridblock, s);
     }
 
-    public void setBlockPosition(Block current)
+    /// <summary>
+    /// Sets a block into the grid. Also gets a new block. Can also cause the player to be game over.
+    /// </summary>
+    /// <param name="blockToSet">The block to set into the grid.</param>
+    public void setBlockPosition(Block blockToSet)
     {
-        for(int x = 0; x < current.Width; x++)
+        for(int x = 0; x < blockToSet.Width; x++)
         {
-            for(int y = 0; y < current.Height; y++)
+            for(int y = 0; y < blockToSet.Height; y++)
             {
-                if (current.blockShape[x, y])
+                if (blockToSet.blockShape[x, y])
                 {
-                    occupiedPositions[x + (int)current.position.X , y +(int)current.position.Y] = current.Color;
+                    occupiedPositions[x + (int)blockToSet.position.X , y +(int)blockToSet.position.Y] = blockToSet.Color;
                 }
             }
         }
 
-        current.position = Vector2.Zero;
+        blockToSet.position = Vector2.Zero;
         currentBlock = Block.GetNextBlock(world);
         if (!this.CanPlaceBlockAt(CurrentBlock, currentBlock.position))
         {
@@ -131,8 +140,19 @@ public class TetrisGrid
      */
     public int Height => 20;
 
+    /// <summary>
+    /// The block that the player can move.
+    /// </summary>
     public Block CurrentBlock => currentBlock;
+
+    /// <summary>
+    /// The color of the background of the grid.
+    /// </summary>
     public Color BackgroundColor => new Color(0x55, 0x55, 0x55, 0xFF);
+
+    /// <summary>
+    /// The color that specifies a position in the grid that is empty.
+    /// </summary>
     public Color EmptyColor => new Color(0, 0, 0, 0);
 }
 
