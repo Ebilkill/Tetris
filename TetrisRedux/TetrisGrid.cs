@@ -67,6 +67,18 @@ public class TetrisGrid
             return false;
         }
 
+        for (int x = 0; x < block.Width; x++)
+        {
+            for(int y = 0; y < block.Height; y++)
+            {
+                if (occupiedPositions[(int)pos.X + x, (int)pos.Y + y] != EmptyColor && block.blockShape[x, y])
+                {
+                    return false;
+                }
+            }
+        }
+        
+
         return true;
     }
 
@@ -86,6 +98,27 @@ public class TetrisGrid
         }
 
        currentBlock.Draw(gridblock, s);
+    }
+
+    public void setBlockPosition(Block current)
+    {
+        for(int x = 0; x < current.Width; x++)
+        {
+            for(int y = 0; y < current.Height; y++)
+            {
+                if (current.blockShape[x, y])
+                {
+                    occupiedPositions[x + (int)current.position.X , y +(int)current.position.Y] = current.Color;
+                }
+            }
+        }
+
+        current.position = Vector2.Zero;
+        currentBlock = Block.GetNextBlock(world);
+        if (!this.CanPlaceBlockAt(CurrentBlock, currentBlock.position))
+        {
+            world.KillPlayer();
+        }
     }
 
     /*

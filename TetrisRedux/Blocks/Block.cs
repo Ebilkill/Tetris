@@ -14,8 +14,18 @@ namespace TetrisRedux.Blocks
         public Vector2 position;
         private Color color;
         protected GameWorld world;
-        
+        static List<Block> nextBlock = new List<Block>();
 
+        public static void makeList(GameWorld world)
+        {
+            nextBlock.Add(new BlockI(world, Vector2.Zero));
+            nextBlock.Add(new BlockJ(world, Vector2.Zero));
+            nextBlock.Add(new BlockL(world, Vector2.Zero));
+            nextBlock.Add(new BlockO(world, Vector2.Zero));
+            nextBlock.Add(new BlockS(world, Vector2.Zero));
+            nextBlock.Add(new BlockT(world, Vector2.Zero));
+            nextBlock.Add(new BlockZ(world, Vector2.Zero));
+        }
         protected Block(GameWorld parent, Color c)
         {
             color = c;
@@ -41,23 +51,20 @@ namespace TetrisRedux.Blocks
             {
                 position += move;
             }
+            else
+            {
+                if (move.Y > 0)
+                {
+                    world.TheGrid.setBlockPosition(this);
+                }
+            }
         }
 
 
         public static Block GetNextBlock(GameWorld world)
         {
-            List<Block> nextBlock = new List<Block>();
-            nextBlock.Add(new BlockI(world, Vector2.Zero));
-            nextBlock.Add(new BlockJ(world, Vector2.Zero));
-            nextBlock.Add(new BlockL(world, Vector2.Zero));
-            nextBlock.Add(new BlockO(world, Vector2.Zero));
-            nextBlock.Add(new BlockS(world, Vector2.Zero));
-            nextBlock.Add(new BlockT(world, Vector2.Zero));
-            nextBlock.Add(new BlockZ(world, Vector2.Zero));
             int r = world.Random.Next(nextBlock.Count);
             return nextBlock[r];
-          
-
         }
 
         public Color Color => color;

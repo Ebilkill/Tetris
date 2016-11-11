@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Input;
 using System;
+using TetrisRedux.Blocks;
 
 /*
  * A class for representing the game world.
@@ -59,6 +60,7 @@ public class GameWorld
 
         block = Content.Load<Texture2D>("block");
         font = Content.Load<SpriteFont>("SpelFont");
+        Block.makeList(this);
         grid = new TetrisGrid(this, block);
     }
 
@@ -94,9 +96,9 @@ public class GameWorld
         if (time > fallingspeed)
         {
             grid.CurrentBlock.Move(new Vector2(0, 1));
-            time = 0;
+            time -= fallingspeed;
         }
-           
+          
     }
 
     public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -112,6 +114,11 @@ public class GameWorld
     public void DrawText(string text, Vector2 positie, SpriteBatch spriteBatch)
     {
         spriteBatch.DrawString(font, text, positie, Color.Blue);
+    }
+
+    public void KillPlayer()
+    {
+        gameState = GameState.GameOver;
     }
 
     public Random Random => random;
