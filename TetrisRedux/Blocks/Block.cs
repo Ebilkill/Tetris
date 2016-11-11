@@ -14,6 +14,7 @@ namespace TetrisRedux.Blocks
         public Vector2 position;
         private Color color;
         protected GameWorld world;
+        
 
         protected Block(GameWorld parent, Color c)
         {
@@ -41,6 +42,7 @@ namespace TetrisRedux.Blocks
                 position += move;
             }
         }
+
 
         public static Block GetNextBlock(GameWorld world)
         {

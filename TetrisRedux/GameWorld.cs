@@ -47,6 +47,8 @@ public class GameWorld
      * the main playing grid
      */
     TetrisGrid grid;
+    private int time = 0;
+    int fallingspeed = 500;
 
     public GameWorld(int width, int height, ContentManager Content)
     {
@@ -84,8 +86,17 @@ public class GameWorld
         }
     }
 
+
+
     public void Update(GameTime gameTime)
     {
+        time += gameTime.ElapsedGameTime.Milliseconds;
+        if (time > fallingspeed)
+        {
+            grid.CurrentBlock.Move(new Vector2(0, 1));
+            time = 0;
+        }
+           
     }
 
     public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
