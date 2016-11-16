@@ -93,9 +93,9 @@ public class GameWorld
         {
             grid.CurrentBlock.Move(new Vector2(0, 1));
         }
-        if (inputHelper.KeyPressed(Keys.Up))
+        if (inputHelper.KeyPressed(Keys.Space, false))
         {
-            grid.CurrentBlock.Move(new Vector2(0, -1));
+            grid.CurrentBlock.Turn();
         }
     }
 

@@ -117,7 +117,7 @@ public class TetrisGrid
             {
                 if (blockToSet.blockShape[x, y])
                 {
-                    occupiedPositions[x + (int)blockToSet.position.X , y +(int)blockToSet.position.Y] = blockToSet.Color;
+                     occupiedPositions[x + (int)blockToSet.position.X , y +(int)blockToSet.position.Y] = blockToSet.Color;
                 }
             }
         }

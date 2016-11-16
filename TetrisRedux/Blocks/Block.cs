@@ -60,6 +60,21 @@ namespace TetrisRedux.Blocks
             }
         }
 
+        public void Turn()
+        {
+            int newWidth = this.Height;
+            int newHeight = this.Width;
+            bool[,] turnedBlock = new bool[newWidth, newHeight];
+            for(int x = 0; x < Width; x++)
+            {
+                for (int y = 0; y < Height; y++) 
+                {
+                    turnedBlock[Height - 1 - y, x] = blockShape[x, y];
+                }
+            }
+            blockShape = turnedBlock;
+        }
+             
 
         public static Block GetNextBlock(GameWorld world)
         {
@@ -69,14 +84,7 @@ namespace TetrisRedux.Blocks
 
         public Color Color => color;
 
-        public abstract int Width
-        {
-            get;
-        }
-
-        public abstract int Height
-        {
-            get;
-        }
+        public int Width => blockShape.GetLength(0);
+        public int Height => blockShape.GetLength(1);
     }
 }

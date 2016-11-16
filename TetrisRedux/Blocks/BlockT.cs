@@ -12,15 +12,11 @@ namespace TetrisRedux.Blocks
         public BlockT(GameWorld world, Vector2 pos) : base(world, new Color(0x94, 0x0B, 0xA0, 0xFF))
         {
             this.position = pos;
-            this.blockShape = new bool[Width, Height];
+            this.blockShape = new bool[3, 2];
             this.blockShape[0, 0] = true;
             this.blockShape[1, 0] = true;
             this.blockShape[2, 0] = true;
             this.blockShape[1, 1] = true;
         }
-
-        public override int Height => 2;
-
-        public override int Width => 3;
     }
 }
